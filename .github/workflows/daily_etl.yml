@@ -1,0 +1,29 @@
+name: Daily Stock Market ETL
+
+on:
+  schedule:
+    # This runs at 00:00 UTC every day (cron syntax)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows you to run it manually with one click
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas yfinance sqlalchemy psycopg2-binary
+
+      - name: Run ETL Script
+        env:
+          # We hide the password in GitHub Secrets for security (2+ years skill!)
+          DB_URL: ${{ secrets.DATABASE_URL }}
+        run: python main.py
