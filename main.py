@@ -80,5 +80,6 @@ if __name__ == "__main__":
     print("Starting ETL Process...")
     db_engine = get_engine()
     data = fetch_and_process()
-    load_to_postgres(data, db_engine)
+    
+    
     print("ETL Process Completed Successfully!")

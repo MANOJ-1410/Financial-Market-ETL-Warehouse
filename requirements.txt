@@ -2,5 +2,6 @@ pandas
 yfinance
 sqlalchemy
 psycopg2-binary
-streamlit
+streamlit>=1.35.0
 plotly
+altair>=5.0.0
